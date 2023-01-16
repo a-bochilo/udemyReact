@@ -7,6 +7,7 @@ const EmployeesListItem = ({
     onToggleProp,
     increase,
     rise,
+    setSalary,
 }) => {
     return (
         <li
@@ -25,7 +26,12 @@ const EmployeesListItem = ({
             <input
                 type="text"
                 className="list-group-item-input"
-                defaultValue={"$" + salary}
+                defaultValue={`$${salary}`}
+                onBlur={(e) => {
+                    const value = e.target.value.match(/\d/g).join("");
+                    setSalary(value);
+                    e.target.value = `$${value}`;
+                }}
             />
             <div className="d-flex justify-content-center align-items-center">
                 <button
